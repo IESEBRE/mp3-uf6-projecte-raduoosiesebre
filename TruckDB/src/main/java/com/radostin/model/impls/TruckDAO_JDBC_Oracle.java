@@ -2,6 +2,7 @@ package com.radostin.model.impls;
 
 import com.radostin.model.daos.DAO;
 import com.radostin.model.entities.Truck;
+import com.radostin.model.exceptions.DAOException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,13 +11,13 @@ import java.util.TreeSet;
 
 public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
     @Override
-    public Alumne get(Long id) throws DAOException {
+    public Truck get(Long id) throws DAOException {
 
         //Declaració de variables del mètode
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
-        Alumne estudiant = null;
+        Truck truck = null;
 
         //Accés a la BD usant l'API JDBC
         try {
@@ -26,15 +27,15 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
                     "C##HR",
                     "HR"
             );
-//            st = con.prepareStatement("SELECT * FROM estudiant WHERE id=?;");
+//            st = con.prepareStatement("SELECT * FROM truck WHERE id=?;");
             st = con.createStatement();
-//            st = con.prepareStatement("SELECT * FROM estudiant WHERE id=?;");
+//            st = con.prepareStatement("SELECT * FROM truck WHERE id=?;");
 //            st.setLong(1, id);
-            rs = st.executeQuery("SELECT * FROM ALUMNES;");
-//            estudiant = new Alumne(rs.getLong(1), rs.getString(2));
+            rs = st.executeQuery("SELECT * FROM TRUCKS;");
+//            truck = new Alumne(rs.getLong(1), rs.getString(2));
 //            st.close();
             if (rs.next()) {
-                estudiant = new Alumne(Long.valueOf(rs.getString(1)), rs.getString(2));
+                truck = new Truck(Long.valueOf(rs.getString(1)), rs.getString(2));
             }
         } catch (SQLException throwables) {
             throw new DAOException(1);
@@ -48,13 +49,13 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
             }
 
         }
-        return estudiant;
+        return truck;
     }
 
     @Override
-    public List<Alumne> getAll() throws DAOException {
+    public List<Truck> getAll() throws DAOException {
         //Declaració de variables del mètode
-        List<Alumne> estudiants = new ArrayList<>();
+        List<Truck> trucks = new ArrayList<>();
 
         //Accés a la BD usant l'API JDBC
         try (Connection con = DriverManager.getConnection(
@@ -62,13 +63,13 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
                 "C##HR",
                 "HR"
         );
-             PreparedStatement st = con.prepareStatement("SELECT * FROM ALUMNES");
+             PreparedStatement st = con.prepareStatement("SELECT * FROM TRUCKS");
              ResultSet rs = st.executeQuery();
         ) {
 
             while (rs.next()) {
-                estudiants.add(new Alumne(rs.getLong("id"), rs.getString("nom"),rs.getDouble("pes"),
-                        new TreeSet<Alumne.Matricula>()));
+                trucks.add(new Truck(rs.getLong("id"), rs.getString("brand"),rs.getDouble("horsepower"), rs.getInt("km"),
+                        new TreeSet<Truck.Driver>()));
             }
         } catch (SQLException throwables) {
             int tipoError = throwables.getErrorCode();
@@ -84,11 +85,11 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
         }
 
 
-        return estudiants;
+        return trucks;
     }
 
     @Override
-    public void save(Alumne obj) throws DAOException {
+    public void save(Truck obj) throws DAOException {
 
     }
 }
