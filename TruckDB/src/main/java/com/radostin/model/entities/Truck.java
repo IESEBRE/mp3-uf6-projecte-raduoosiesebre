@@ -68,6 +68,14 @@ public class Truck {
         this.truckHorsepower = truckHorsepower;
     }
 
+    public int getTruckKM(){
+        return truckKM;
+    }
+
+    public void setTruckKM(int truckKM){
+        this.truckKM = truckKM;
+    }
+
     public boolean isTruckIsElectric() {
         return truckIsElectric;
     }

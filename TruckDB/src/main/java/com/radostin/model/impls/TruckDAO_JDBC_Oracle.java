@@ -23,7 +23,7 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
         try {
 
             con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@//localhost:1521/xe",
+                    "jdbc:oracle:thin:@//elrado.ddns.net:1521/xe",
                     "C##HR",
                     "HR"
             );
@@ -59,7 +59,7 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
 
         //Accés a la BD usant l'API JDBC
         try (Connection con = DriverManager.getConnection(
-                "jdbc:oracle:thin:@//localhost:1521/xe",
+                "jdbc:oracle:thin:@//elrado.ddns.net:1521/xe",
                 "C##HR",
                 "HR"
         );
@@ -83,8 +83,6 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
             }
             throw new DAOException(tipoError);
         }
-
-
         return trucks;
     }
 

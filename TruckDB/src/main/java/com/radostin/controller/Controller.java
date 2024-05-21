@@ -136,7 +136,7 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
                                     NumberFormat num = NumberFormat.getNumberInstance(Locale.getDefault());   //Creem un número que entèn la cultura que utilitza l'aplicació
                                     double hp = num.parse(truckHorsepowerField.getText().trim()).doubleValue();  //intentem convertir el text a double
                                     if (hp < 200 || hp > 3000) throw new ParseException("", 0);
-                                    Truck truck = new Truck(truckBrandField.getText(), hp, truckKMField, truckIsElectric.isSelected(), new TreeSet<Truck.Driver>());
+                                    Truck truck = new Truck(truckBrandField.getText(), hp, (Integer.parseInt(truckKMField.getText())), truckIsElectric.isSelected(), new TreeSet<Truck.Driver>());
                                     truckModel.addRow(new Object[]{
                                             truckBrandField.getText(),
                                             hp,
@@ -195,12 +195,12 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
 
                     //Activem la pestanya de la matrícula de l'alumne seleccionat
                     view.getMyWindows().setEnabledAt(1, true);
-                    view.getMyWindows().setTitleAt(1, "Matrícula de " + truckBrandField.getText());
+                    view.getMyWindows().setTitleAt(1, "Driver of " + truckBrandField.getText());
 
                     //Posem valor a el combo d'MPs
                     //view.getComboMP().setModel(modelo.getComboBoxModel());
                     fillDriver((Truck) truckModel.getValueAt(filaSel, 3),driverModel);
-                } else { //Hem deseleccionat una fila
+                } else { //Hem desseleccionat una fila
                     //Posem els camps de text en blanc
                     truckBrandField.setText("");
                     truckHorsepowerField.setText("");
@@ -236,12 +236,12 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
 
 
 
-    private static void fillDriver(Truck truck,DefaultTableModel modelMat) {
+    private static void fillDriver(Truck truck,DefaultTableModel driverModel) {
         //Omplim el model de la taula de matrícula de l'alumne seleccionat
-        modelMat.setRowCount(0);
+        driverModel.setRowCount(0);
         // Fill the table model with data from the collection
         for (Truck.Driver driver : truck.getDrivers()) {
-            modelMat.addRow(new Object[]{
+            driverModel.addRow(new Object[]{
                     driver.getTruckEnum(), 
                     driver.getLicenseNumber()
             });
