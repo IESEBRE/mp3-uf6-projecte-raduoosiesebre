@@ -147,13 +147,13 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
                                     truckBrandField.setSelectionStart(0);
                                     truckBrandField.setSelectionEnd(truckBrandField.getText().length());
                                     truckHorsepowerField.setText("75");
-                                    truckBrandField.requestFocus();         //intentem que el foco vaigue al camp del nom
+                                    //truckBrandField.requestFocus();         //intentem que el foco vaigue al camp del nom
                                 } catch (ParseException ex) {
                                     setExcepcio(new DAOException(3));
 //                                    JOptionPane.showMessageDialog(null, "Has d'introduir un pes correcte (>=1 i <=800!!");
                                     truckHorsepowerField.setSelectionStart(0);
                                     truckHorsepowerField.setSelectionEnd(truckHorsepowerField.getText().length());
-                                    truckHorsepowerField.requestFocus();
+                                    //truckHorsepowerField.requestFocus();
                                 }
                             }
                         } else {         //Si estem a la pestanya de la matricula
@@ -208,7 +208,7 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
                     
                     //Desactivem pestanyes
                     view.getMyWindows().setEnabledAt(1, false);
-                    view.getMyWindows().setTitleAt(1, "Matrícula de ...");
+                    view.getMyWindows().setTitleAt(1, "Driver of ...");
                 }
             }
         });
@@ -222,8 +222,8 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                String regex1="^[A-ZÀ-ÚÑÇ][a-zà-úñç]+\\s+[A-ZÀ-ÚÑÇ][a-zà-úñç]+\\s+[A-ZÀ-ÚÑÇ][a-zà-úñç]+$",
-                        regex2="^[A-ZÀ-ÚÑÇ][a-zà-úñç]+(\\s*,\\s*)[A-ZÀ-ÚÑÇ][a-zà-úñç]+\\s+[A-ZÀ-ÚÑÇ][a-zà-úñç]+$";;
+                String regex1="",
+                        regex2="";;
                 //String regex="[À-ú]";
                 //Pattern pattern = Pattern.compile(regex);
                 if(truckBrandField.getText().isBlank() || (!truckBrandField.getText().matches(regex1) && !truckBrandField.getText().matches(regex2))){
@@ -301,7 +301,7 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
                             //this.view.getCampNom().setText(received.getMissatge());
                             this.view.getTruckBrandField().setSelectionStart(0);
                             this.view.getTruckBrandField().setSelectionEnd(this.view.getTruckBrandField().getText().length());
-                            this.view.getTruckBrandField().requestFocus();
+                            //this.view.getTruckBrandField().requestFocus();
 
                             break;
                     }
