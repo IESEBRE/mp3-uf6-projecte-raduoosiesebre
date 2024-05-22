@@ -4,9 +4,14 @@ import com.radostin.model.daos.DAO;
 import com.radostin.model.entities.Truck;
 import com.radostin.model.exceptions.DAOException;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.TreeSet;
 
 public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
@@ -19,13 +24,22 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
         ResultSet rs = null;
         Truck truck = null;
 
+        Properties properties = new Properties();
+        InputStream inputStream = null;
+
         //Accés a la BD usant l'API JDBC
         try {
+            inputStream = new FileInputStream("src/main/resources/database.properties");
+            properties.load(inputStream);
+
+            String url = properties.getProperty("db.url");
+            String user = properties.getProperty("db.user");
+            String password = properties.getProperty("db.password");
 
             con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@//elrado.ddns.net:1521/xe",
-                    "C##HR",
-                    "HR"
+                    url,
+                    user,
+                    password
             );
 //            st = con.prepareStatement("SELECT * FROM truck WHERE id=?;");
             st = con.createStatement();
@@ -37,8 +51,10 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
             if (rs.next()) {
                 truck = new Truck(Long.valueOf(rs.getString(1)), rs.getString(2));
             }
-        } catch (SQLException throwables) {
+        } catch (SQLException | FileNotFoundException throwables) {
             throw new DAOException(1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } finally {
             try {
                 if (rs != null) rs.close();
