@@ -31,7 +31,7 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
             st = con.createStatement();
 //            st = con.prepareStatement("SELECT * FROM truck WHERE id=?;");
 //            st.setLong(1, id);
-            rs = st.executeQuery("SELECT * FROM TRUCKS;");
+            rs = st.executeQuery("SELECT * FROM C##HR.TRUCK");
 //            truck = new Alumne(rs.getLong(1), rs.getString(2));
 //            st.close();
             if (rs.next()) {
@@ -63,7 +63,7 @@ public class TruckDAO_JDBC_Oracle implements DAO<Truck> {
                 "C##HR",
                 "HR"
         );
-             PreparedStatement st = con.prepareStatement("SELECT * FROM TRUCKS");
+             PreparedStatement st = con.prepareStatement("SELECT * FROM C##HR.TRUCK");
              ResultSet rs = st.executeQuery();
         ) {
 

@@ -77,7 +77,10 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
         // Fill the table model with data from the collection
         for (Truck truck : all){
             modelTrucksTable.addRow(new Object[]{
-
+                truck.getTruckBrand(),
+                    truck.getTruckHorsepower(),
+                    true,
+                    truck.isTruckIsElectric()
             });
         }
 
@@ -191,7 +194,7 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
                     truckBrandField.setText(truckModel.getValueAt(filaSel, 0).toString());
                     truckHorsepowerField.setText(truckModel.getValueAt(filaSel, 1).toString().replaceAll("\\.", ","));
                     truckKMField.setText(truckModel.getValueAt(filaSel, 1).toString().replaceAll("\\.", ","));
-                    truckIsElectric.setSelected((Boolean) truckModel.getValueAt(filaSel, 2));
+                    truckIsElectric.setSelected((Boolean) truckModel.getValueAt(filaSel, 3));
 
                     //Activem la pestanya de la matrícula de l'alumne seleccionat
                     view.getMyWindows().setEnabledAt(1, true);
@@ -222,12 +225,14 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                String regex1="^[A-ZÀ-ÚÑÇ][a-zà-úñç]+\\s+[A-ZÀ-ÚÑÇ][a-zà-úñç]+\\s+[A-ZÀ-ÚÑÇ][a-zà-úñç]+$",
-                        regex2="^[A-ZÀ-ÚÑÇ][a-zà-úñç]+(\\s*,\\s*)[A-ZÀ-ÚÑÇ][a-zà-úñç]+\\s+[A-ZÀ-ÚÑÇ][a-zà-úñç]+$";;
+                String regex1="",
+                        regex2="";;
                 //String regex="[À-ú]";
                 //Pattern pattern = Pattern.compile(regex);
                 if(truckBrandField.getText().isBlank() || (!truckBrandField.getText().matches(regex1) && !truckBrandField.getText().matches(regex2))){
+                    /*
                     setExcepcio(new DAOException(2));
+                     */
                 }
             }
         });
