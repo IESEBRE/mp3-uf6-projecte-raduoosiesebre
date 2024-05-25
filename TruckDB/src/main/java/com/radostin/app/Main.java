@@ -1,22 +1,20 @@
 package com.radostin.app;
 
-import com.radostin.controller.Controller;
-import com.radostin.model.impls.TruckDAO_JDBC_Oracle;
-import com.radostin.view.DriverView;
-
-import javax.swing.*;
-import java.util.Locale;
+import com.radostin.controller.TruckController;
+import com.radostin.model.exceptions.DAOException;
+import com.radostin.model.impls.TruckDAO;
+import com.radostin.view.TruckView;
 
 public class Main {
     public static void main(String[] args) {
+        try {
+            TruckDAO truckDAO = new TruckDAO();
+            TruckView truckView = new TruckView();
+            new TruckController(truckDAO, truckView);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                //Definim la cultura de la nostra aplicació
-                Locale.setDefault(new Locale("en","US"));
-                new Controller(new TruckDAO_JDBC_Oracle(), new DriverView());
-            }
-        });
+            truckView.setVisible(true);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 }

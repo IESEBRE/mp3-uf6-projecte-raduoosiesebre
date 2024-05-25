@@ -1,137 +1,69 @@
 package com.radostin.model.entities;
 
-import java.util.Collection;
-import java.util.TreeSet;
+import com.radostin.model.type.EngineType;
 
 public class Truck {
+    private int id;
+    private String brand;
+    private Double horsepower;
+    private Integer kilometers;
+    private Boolean trailer;
+    private EngineType engineType;
 
-    private Long id;
-    private String truckBrand;
-    private double truckHorsepower;
-    private int truckKM;
-    private boolean truckIsElectric;
-
-    private Collection<Driver> drivers;
-
-
-    public Truck(){}
-
-    public Truck(String nom, double truckHorsepower, int truckKM, boolean truckIsElectric, Collection<Driver> drivers) {
-        this.truckBrand = nom;
-        this.truckHorsepower = truckHorsepower;
-        this.truckKM = truckKM;
-        this.truckIsElectric = truckIsElectric;
-        this.drivers = drivers;
-    }
-
-    public Truck(Long id, String nom) {
+    public Truck(int id, String brand, Double horsepower, Integer kilometers, Boolean trailer, EngineType engineType) {
         this.id = id;
-        this.truckBrand = nom;
+        this.brand = brand;
+        this.horsepower = horsepower;
+        this.kilometers = kilometers;
+        this.trailer = trailer;
+        this.engineType = engineType;
     }
 
-    public Truck(long id, String nom, double truckHorsepower, int truckKM) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.truckBrand = nom;
-        this.truckHorsepower = truckHorsepower;
-        this.truckKM = truckKM;
     }
 
-    public Truck(long id, String nom, double truckHorsepower, int truckKM, TreeSet<Driver> drivers) {
-        this.id = id;
-        this.truckBrand = nom;
-        this.truckHorsepower = truckHorsepower;
-        this.truckKM = truckKM;
-        this.drivers = drivers;
+    public String getBrand() {
+        return brand;
     }
 
-    public Collection<Driver> getDrivers() {
-        return drivers;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    private void setDrivers(Collection<Driver> drivers) {
-        this.drivers = drivers;
+    public Double getHorsepower() {
+        return horsepower;
     }
 
-    public String getTruckBrand() {
-        return truckBrand;
+    public void setHorsepower(Double horsepower) {
+        this.horsepower = horsepower;
     }
 
-    public void setTruckBrand(String truckBrand) {
-        this.truckBrand = truckBrand;
+    public Integer getKilometers() {
+        return kilometers;
     }
 
-    public double getTruckHorsepower() {
-        return truckHorsepower;
+    public void setKilometers(Integer kilometers) {
+        this.kilometers = kilometers;
     }
 
-    public void setTruckHorsepower(double truckHorsepower) {
-        this.truckHorsepower = truckHorsepower;
+    public Boolean getTruckHasTrailerCheckBox() {
+        return trailer;
     }
 
-    public int getTruckKM(){
-        return truckKM;
+    public void setTruckHasTrailerCheckBox(Boolean trailer) {
+        this.trailer = trailer;
     }
 
-    public void setTruckKM(int truckKM){
-        this.truckKM = truckKM;
+    public EngineType getEngineType() {
+        return engineType;
     }
 
-    public boolean isTruckIsElectric() {
-        return truckIsElectric;
-    }
-
-    public void setTruckIsElectric(boolean truckIsElectric) {
-        this.truckIsElectric = truckIsElectric;
-    }
-
-    public static class Driver implements Comparable<Driver>{
-
-        @Override
-        public int compareTo(Driver o) {
-            return this.truckENUM.compareTo(o.getTruckEnum());
-        }
-
-        public static enum TruckENUM {
-            TR1("Mercedes-Benz"), TR2("Scania"), TR3("Volvo"),
-            TR4("DAF"), TR5("Renault"), TR6("IVECO");
-            private String truckBrand;
-
-            private TruckENUM(String truckBrand) {
-                this.truckBrand = truckBrand;
-            }
-
-            public String getTruckBrand() {
-                return truckBrand;
-            }
-
-            @Override
-            public String toString() {
-                return this.name()+" - " + truckBrand;
-            }
-        }
-
-        private TruckENUM truckENUM;
-        private String licenseNumber;
-
-        public Driver(TruckENUM truckENUM, String licenseNumber) {
-            this.truckENUM = truckENUM;
-            this.licenseNumber = licenseNumber;
-        }
-
-        public TruckENUM getTruckEnum() {
-            return truckENUM;
-        }
-
-        public void setModul(TruckENUM truckENUM) {
-            this.truckENUM = truckENUM;
-        }
-
-        public String getLicenseNumber() {
-            return licenseNumber;
-        }
-
-        public void setLicenseNumber(String licenseNumber) {
-            this.licenseNumber = licenseNumber;
-        }
+    public void setEngineType(EngineType engineType) {
+        this.engineType = engineType;
     }
 }
