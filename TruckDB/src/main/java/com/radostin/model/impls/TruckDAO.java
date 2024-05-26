@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Data Access Object for Truck entity.
+ * @author Radostin V. Ivanov.
+ * @version 1.0
+ */
+
 public class TruckDAO {
     private Connection connection;
 
@@ -57,6 +63,16 @@ public class TruckDAO {
         return trucks;
     }
 
+    /**
+     * Add a new truck to the database.
+     * @param brand Inserting truck brand.
+     * @param horsepower Inserting truck horsepower.
+     * @param kilometers Inserting truck kilometers.
+     * @param hasTrailer Checking the checkbox if the truck hasTrailer.
+     * @param type Selecting the truck engine type.
+     * @throws DAOException If the truck cannot be added.
+     */
+
     public void addTruck(String brand, Double horsepower, Integer kilometers, Boolean hasTrailer, EngineType type) throws DAOException {
         try {
             PreparedStatement pstmt = connection.prepareStatement("{call insert_truck(?, ?, ?, ?, ?)}");
@@ -71,6 +87,17 @@ public class TruckDAO {
             throw new DAOException("Failed to add truck", e);
         }
     }
+
+    /**
+     * Update truck in the database.
+     * @param id The truck id is automatic, no need to insert it.
+     * @param brand The truck brand.
+     * @param horsepower The truck horsepower.
+     * @param kilometers The truck kilometers.
+     * @param hasTrailer The checkbox if the truck hasTrailer.
+     * @param type The truck engine type selection.
+     * @throws DAOException
+     */
 
     public void updateTruck(int id, String brand, Double horsepower, Integer kilometers, Boolean hasTrailer, EngineType type) throws DAOException {
         try {
@@ -87,6 +114,12 @@ public class TruckDAO {
             throw new DAOException("Failed to update truck", e);
         }
     }
+
+    /**
+     * Delete truck from the database.
+     * @param id The truck id that needs to be deleted.
+     * @throws DAOException
+     */
 
     public void deleteTruck(int id) throws DAOException {
         try {
