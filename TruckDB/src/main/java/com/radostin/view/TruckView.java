@@ -5,6 +5,8 @@ import com.radostin.model.type.EngineType;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TruckView extends JFrame {
 
@@ -28,6 +30,22 @@ public class TruckView extends JFrame {
 
         // Initialize table
         table = new JTable(new DefaultTableModel(new Object[]{"ID", "Brand", "Horsepower", "Kilometers", "Has Trailer", "Engine Type"}, 0));
+
+        // The mouse listener for the table
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = table.getSelectedRow();
+                if (selectedRow != -1){
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    truckBrandField.setText(model.getValueAt(selectedRow, 1).toString());
+                    truckHorsepowerField.setText(model.getValueAt(selectedRow, 2).toString());
+                    truckKMField.setText(model.getValueAt(selectedRow, 3).toString());
+                    truckHasTrailerCheckBox.setSelected(Boolean.parseBoolean(model.getValueAt(selectedRow, 4).toString()));
+                    engineTypeJComboBox.setSelectedItem(EngineType.valueOf(model.getValueAt(selectedRow, 5).toString()));
+                }
+            }
+        });
 
         // Initialize buttons
         insertButton = new JButton("Add");
