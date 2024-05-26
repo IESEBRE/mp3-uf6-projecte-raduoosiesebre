@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.radostin.app"},{"l":"com.radostin.controller"},{"l":"com.radostin.model.daos"},{"l":"com.radostin.model.entities"},{"l":"com.radostin.model.exceptions"},{"l":"com.radostin.model.impls"},{"l":"com.radostin.model.type"},{"l":"com.radostin.view"}];updateSearchResults();
