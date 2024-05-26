@@ -1,0 +1,8 @@
+com.radostin.app
+com.radostin.controller
+com.radostin.model.daos
+com.radostin.model.entities
+com.radostin.model.exceptions
+com.radostin.model.impls
+com.radostin.model.type
+com.radostin.view

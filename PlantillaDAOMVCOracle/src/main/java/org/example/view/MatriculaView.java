@@ -33,7 +33,7 @@ public class MatriculaView extends JFrame{
     public JTextField getCampNota() {
         return campNota;
     }
-
+z
     public JTabbedPane getPestanyes() {
         return pestanyes;
     }
